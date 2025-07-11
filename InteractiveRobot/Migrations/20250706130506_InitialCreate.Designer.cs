@@ -4,6 +4,7 @@ using InteractiveRobot.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InteractiveRobot.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250706130506_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,9 +42,6 @@ namespace InteractiveRobot.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsBanned")
                         .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
@@ -191,21 +191,6 @@ namespace InteractiveRobot.Migrations
                     b.ToTable("DoctorRatings");
                 });
 
-            modelBuilder.Entity("InteractiveRobot.Models.DoctorSpecialty", b =>
-                {
-                    b.Property<string>("DoctorId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("SpecialtyId")
-                        .HasColumnType("int");
-
-                    b.HasKey("DoctorId", "SpecialtyId");
-
-                    b.HasIndex("SpecialtyId");
-
-                    b.ToTable("DoctorSpecialties");
-                });
-
             modelBuilder.Entity("InteractiveRobot.Models.Medication", b =>
                 {
                     b.Property<int>("Id")
@@ -261,23 +246,6 @@ namespace InteractiveRobot.Migrations
                     b.HasIndex("ApplicationUserId");
 
                     b.ToTable("PasswordResetCodes");
-                });
-
-            modelBuilder.Entity("InteractiveRobot.Models.Specialty", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Specialties");
                 });
 
             modelBuilder.Entity("InteractiveRobot.Models.SuggestedGame", b =>
@@ -516,25 +484,6 @@ namespace InteractiveRobot.Migrations
                     b.Navigation("Parent");
                 });
 
-            modelBuilder.Entity("InteractiveRobot.Models.DoctorSpecialty", b =>
-                {
-                    b.HasOne("InteractiveRobot.Models.ApplicationUser", "Doctor")
-                        .WithMany("DoctorSpecialties")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("InteractiveRobot.Models.Specialty", "Specialty")
-                        .WithMany("DoctorSpecialties")
-                        .HasForeignKey("SpecialtyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Doctor");
-
-                    b.Navigation("Specialty");
-                });
-
             modelBuilder.Entity("InteractiveRobot.Models.Medication", b =>
                 {
                     b.HasOne("InteractiveRobot.Models.Treatment", "Treatment")
@@ -633,8 +582,6 @@ namespace InteractiveRobot.Migrations
 
                     b.Navigation("DoctorRatings");
 
-                    b.Navigation("DoctorSpecialties");
-
                     b.Navigation("Treatments");
                 });
 
@@ -643,11 +590,6 @@ namespace InteractiveRobot.Migrations
                     b.Navigation("Diagnoses");
 
                     b.Navigation("Treatments");
-                });
-
-            modelBuilder.Entity("InteractiveRobot.Models.Specialty", b =>
-                {
-                    b.Navigation("DoctorSpecialties");
                 });
 
             modelBuilder.Entity("InteractiveRobot.Models.Treatment", b =>

@@ -5,6 +5,6 @@ namespace InteractiveRobot.DTOs.Requests
     public class ResendEmailRequest
     {
         [Required]
-        public string EmailOrUserName { get; set; } = null!;
+        public string EmailOrUserName { get; set; } = string.Empty;
     }
 }

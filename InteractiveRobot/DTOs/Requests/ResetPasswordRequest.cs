@@ -4,19 +4,17 @@ namespace InteractiveRobot.DTOs.Requests
 {
     public class ResetPasswordRequest
     {
-        public string UserId { get; set; } = null!;
-        public string Token { get; set; } = null!;
+        public string Code { get; set; } = string.Empty;
         [Required]
-        [DataType(DataType.EmailAddress)]
-        public string Email { get; set; } = null!;
+        public string EmailOrUserName { get; set; } = string.Empty;
 
         [Required]
         [DataType(DataType.Password)]
-        public string Password { get; set; } = null!;
+        public string Password { get; set; } = string.Empty;
 
         [Required]
         [DataType(DataType.Password)]
         [Compare(nameof(Password))]
-        public string ConfirmPassword { get; set; } = null!;
+        public string ConfirmPassword { get; set; } = string.Empty;
     }
 }

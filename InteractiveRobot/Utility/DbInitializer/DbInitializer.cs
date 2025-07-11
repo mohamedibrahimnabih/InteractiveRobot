@@ -37,19 +37,21 @@ namespace InteractiveRobot.Utility.DbInitializer
                     {
                         UserName = "SuperAdmin",
                         Email = "SuperAdmin@gmail.com",
+                        Name = "SuperAdmin",
+                        EmailConfirmed = true
                     }, "Admin123*").GetAwaiter().GetResult();
 
                     var user = _userManager.FindByEmailAsync("SuperAdmin@gmail.com").GetAwaiter().GetResult();
 
                     if (user is not null)
                     {
-                        _userManager.AddToRoleAsync(user, "SuperAdmin").GetAwaiter().GetResult();
+                        _userManager.AddToRoleAsync(user, SD.SuperAdmin).GetAwaiter().GetResult();
                     }
                 }
             }
             catch(Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Error: {ex.Message}");
             }
         }
     }

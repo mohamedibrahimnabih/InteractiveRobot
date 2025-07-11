@@ -6,23 +6,23 @@ namespace InteractiveRobot.DTOs.Requests
     {
         [Required]
         [DataType(DataType.EmailAddress)]
-        public string Email { get; set; } = null!;
+        public string Email { get; set; } = string.Empty;
 
         [Required]
-        public string UserName { get; set; } = null!;
+        public string UserName { get; set; } = string.Empty;
         [Required]
-        public string Name { get; set; } = null!;
+        public string Name { get; set; } = string.Empty;
 
         [Required]
         [DataType(DataType.Password)]
-        public string Password { get; set; } = null!;
+        public string Password { get; set; } = string.Empty;
 
         [Required]
         [DataType(DataType.Password)]
         [Compare(nameof(Password))]
-        public string ConfirmPassword { get; set; } = null!;
+        public string ConfirmPassword { get; set; } = string.Empty;
+        public UserType UserType { get; set; }
+        public List<int>? SpecialtyIds { get; set; }
 
-        [Required]
-        public ApplicationUserType ApplicationUserType { get; set; }
     }
 }
