@@ -47,8 +47,12 @@ namespace InteractiveRobot
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
 
+            //Data Source=.;Initial Catalog=InteractiveRobot; Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;
+
+            //Server=db23297.public.databaseasp.net; Database=db23297; User Id=db23297; Password=Pb5!4?eRaG-7; Encrypt=True; TrustServerCertificate=True; MultipleActiveResultSets=True;
+
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer("Data Source=.;Initial Catalog=InteractiveRobot; Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;"));
+                options.UseSqlServer("Server=db23297.public.databaseasp.net; Database=db23297; User Id=db23297; Password=Pb5!4?eRaG-7; Encrypt=True; TrustServerCertificate=True; MultipleActiveResultSets=True;"));
 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                             .AddEntityFrameworkStores<ApplicationDbContext>()
