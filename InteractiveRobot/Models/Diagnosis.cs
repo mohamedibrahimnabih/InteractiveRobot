@@ -1,4 +1,6 @@
-﻿namespace InteractiveRobot.Models
+﻿using System.Text.Json.Serialization;
+
+namespace InteractiveRobot.Models
 {
     public class Diagnosis
     {
@@ -10,6 +12,7 @@
 
         // Child Relationship
         public int ChildId { get; set; }
+        [JsonIgnore]
         public Child? Child { get; set; }
     }
 }
