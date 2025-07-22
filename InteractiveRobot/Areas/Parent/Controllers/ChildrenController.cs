@@ -38,6 +38,7 @@ namespace InteractiveRobot.Areas.Parent.Controllers
             var parentId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var child = await _context.Children
+                .Include(e => e.Diagnoses)
                 .FirstOrDefaultAsync(c => c.Id == id && c.ParentId == parentId);
 
             if (child == null)
